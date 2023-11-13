@@ -65,9 +65,9 @@ export class WebServer {
         socketIo.on('connection', function (socket) {
             console.log(socket.id);
             // Service methodes
-            socket.on('getTemperatureAndHumidity', () => {
+            socket.on('getTemperatureAndHumidity', function (this) {
 
-                socket.emit("returnTemperatureAndHumidity", ()=>{return this.tempAndHumidityReader.getTemperatureAndHumidity()});
+                socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
 
             });
 
@@ -79,6 +79,7 @@ export class WebServer {
         return this;
     }
 
+    
 
 }
 
