@@ -83,12 +83,13 @@ export class WebServer {
 
         });
 
-        
+       
       
+        var self = this;
         setTimeout(function next() {
 
             // Do something...
-            this.TransmitTempAndHumid();
+            self.TransmitTempAndHumid();
 
             // Have the function set another timeout to call itself later.
             setTimeout(next, 500);
