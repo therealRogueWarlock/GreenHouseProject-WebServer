@@ -46,7 +46,7 @@ export class WebServer {
         })
 
         // Loading socket io module
-        var socketIo = new socketServer(server);
+        var socketIo = new socketServer(this.server);
 
         // When communication is established
         socketIo.on('connection', function (socket) {
