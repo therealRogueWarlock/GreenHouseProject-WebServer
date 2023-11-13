@@ -55,7 +55,7 @@ export class WebServer {
         this.server.listen(8888);
         console.log("Server Running ...");
         
-        var socketIo = SocketServer(this.server);
+        var socketIo = new SocketServer(this.server);
         // When communication is established
         socketIo.on('connection', function (socket) {
             console.log(socket.id);
