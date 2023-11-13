@@ -62,7 +62,8 @@ export class WebServer {
     StartServer(){
 
         if(!this.server) return;
-        
+        var self = this;
+
         var socketIo = new SocketServer(this.server);
         // When communication is established
 
@@ -78,7 +79,7 @@ export class WebServer {
             });
 
             socket.on('ListenToTempAndHumid',()=>{
-                this.listeners.get("ListenToTempAndHumid").push(socket)
+                self.listeners.get("ListenToTempAndHumid").push(socket)
             })
 
         });
@@ -86,7 +87,7 @@ export class WebServer {
         let i = 0;
         setInterval(() => {
             console.log('Infinite Loop Test interval n:', i++);
-            this.TransmitTempAndHumid();
+            self.TransmitTempAndHumid();
         }, 2000)
       
 
@@ -103,7 +104,7 @@ export class WebServer {
             console.log(socket.id)
             socket.emit("returnTemperatureAndHumidity", data)})
     }
-    
+
 
 }
 
