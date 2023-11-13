@@ -1,8 +1,6 @@
 
 export class WebServer {
 
-    
-
     constructor() {
         //Loading modules
         this.http = require('http');
