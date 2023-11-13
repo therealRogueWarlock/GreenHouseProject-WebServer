@@ -18,7 +18,7 @@ export class WebServer {
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
             console.log(req.url);
-            var file = '.' + ((req.url == '/') ? '/index.html' : req.url);
+            var file = '.' + ((req.url == '/') ? '../WebInterface/index.html' : req.url);
             console.log(file);
             var fileExtension = path.extname(file);
             var contentType = 'text/html';
@@ -41,7 +41,7 @@ export class WebServer {
                 else {
                     // Page not found
                     res.writeHead(404);
-                    res.end('Page not found');
+                    res.end('Page not found!!!');
                 }
             })
         })
