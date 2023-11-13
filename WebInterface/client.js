@@ -19,17 +19,20 @@ socket.on("returnTemperatureAndHumidity", (data) => {
     temperatureValue = jsonObject.Temperature/10;
     humidityValue = jsonObject.Humidity;
 
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
-
     document.getElementById("tempValue").innerHTML = temperatureValue;
     document.getElementById("tempTime").innerHTML = dateTime;
     document.getElementById("humidValue").innerHTML = humidityValue;
     document.getElementById("humidTime").innerHTML = dateTime;
 });
 
+
+function GetCurrentDateTime(){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    return dateTime;
+}
 
 setInterval(()=>{
     socket.emit("getTemperatureAndHumidity")
