@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
  // Loading socket io module
 import {Server as SocketServer} from 'socket.io';
-import TempAndHumidity from 'TempAndHumidity.js'
+import TempAndHumidity from './BBBDriverCall/TempAndHumidity.js'
 
 export class WebServer {
 
