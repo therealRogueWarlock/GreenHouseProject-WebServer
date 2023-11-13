@@ -1,5 +1,8 @@
 
 export class CommandCaller{
+
+    static child_process = require('child_process');
+
     static systemSync(cmd) {
         return child_process.execSync(cmd).toString();
     }

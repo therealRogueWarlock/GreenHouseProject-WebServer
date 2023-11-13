@@ -1,3 +1,6 @@
+import {require} from "require"
+
+
 
 export class WebServer {
 
@@ -8,8 +11,7 @@ export class WebServer {
         this.http = require('http');
         this.fs = require('fs');
         this.path = require('path');
-        this.child_process = require('child_process');
-
+        
         this.server;
     }
 
