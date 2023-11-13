@@ -102,14 +102,14 @@ export class WebServer {
     }
 
     TransmitTempAndHumid() {
-        var listenersArray = self.listeners.get("ListenToTempAndHumid");
+        var listenersArray = this.listeners.get("ListenToTempAndHumid");
         
         if (listenersArray.length < 1) return;
 
         console.log("get temp...")
 
         var data = TempAndHumidity.getTemperatureAndHumidity();
-        
+
         listenersArray.forEach((socket) => {
             console.log("Brordcast to " + socket.id)
             socket.emit("returnTemperatureAndHumidity", data)
