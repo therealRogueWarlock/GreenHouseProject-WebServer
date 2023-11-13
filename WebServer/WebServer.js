@@ -30,10 +30,10 @@ export class WebServer {
             
             fs.exists(file, function (exists) {
                 if (exists) {
-                    console.log("file exists")
+            
                     fs.readFile(file, function (error, content) {
                         if (!error) {
-                            console.log("error on load")
+                            
                             // Page found, write content
                             res.writeHead(200, { 'content-type': contentType });
                             res.end(content);
@@ -43,7 +43,6 @@ export class WebServer {
                 else {
                     // Page not found
                     res.writeHead(404);
-                    console.log("file does not exists")
                     res.end('Page not found!!!');
                     
                 }
