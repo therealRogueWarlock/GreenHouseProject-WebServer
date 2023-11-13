@@ -10,7 +10,7 @@ export class WebServer {
 
     constructor() {
         this.server;
-        this.tempAndHumidityReader = new TempAndHumidity();
+        this.tempAndHumidityReader = new TempAndHumidity("./i2ctest");
     }
 
     InitServer() {
