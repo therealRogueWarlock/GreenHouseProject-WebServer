@@ -9,8 +9,9 @@ import {TempAndHumidity} from './BBBDriverCall/TempAndHumidity.js'
 export class WebServer {
 
     constructor() {
-        var listeners = new Map();
-        listeners.set("ListenToTempAndHumid", [])
+        this.listeners = new Map();
+
+        this.listeners.set("ListenToTempAndHumid", [])
 
         this.server;
     }
