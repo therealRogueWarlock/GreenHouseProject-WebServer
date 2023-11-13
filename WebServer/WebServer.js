@@ -1,3 +1,6 @@
+import {require} from "require"
+
+
 
 export class WebServer {
 

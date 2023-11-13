@@ -1,4 +1,4 @@
-import {WebServer} from "./WebServer/WebServer.mjs"
+import {WebServer} from "./WebServer/WebServer.js"
 
 
 new WebServer().InitServer().StartServer();
