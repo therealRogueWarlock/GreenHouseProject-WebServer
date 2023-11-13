@@ -52,8 +52,8 @@ export class WebServer {
     }
 
     StartServer(){
-        this.server.listen(8888);
-        console.log("Server Running ...");
+
+        if(!this.server) return;
         
         var socketIo = new SocketServer(this.server);
         // When communication is established
@@ -68,6 +68,9 @@ export class WebServer {
 
         });
 
+        this.server.listen(8888);
+        console.log("Server Running ...");
+        
         return this;
     }
 
