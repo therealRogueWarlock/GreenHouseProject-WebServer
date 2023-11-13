@@ -60,13 +60,13 @@ export class WebServer {
 
         });
 
-        return this.server;
+        return this;
     }
 
     StartServer(){
         this.server.listen(8888);
         console.log("Server Running ...");
-        return this.server;
+        return this;
     }
 
 
