@@ -34,5 +34,5 @@ function GetCurrentDateTime(){
     return dateTime;
 }
 
-socket.emit("getTemperatureAndHumidity");
+socket.emit("ListenToTempAndHumid");
 

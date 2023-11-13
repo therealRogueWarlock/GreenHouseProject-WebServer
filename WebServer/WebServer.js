@@ -83,21 +83,12 @@ export class WebServer {
 
         });
 
-       
+        let i = 0;
+        setInterval(() => {
+            console.log('Infinite Loop Test interval n:', i++);
+            this.TransmitTempAndHumid();
+        }, 2000)
       
-        var self = this;
-        setTimeout(function next() {
-
-            console.log("loop")
-            // Do something...
-            self.TransmitTempAndHumid();
-
-            // Have the function set another timeout to call itself later.
-            setTimeout(next, 500);
-        
-        }, 500);
-
-
 
         this.server.listen(8888);
         console.log("Server Running ...");
@@ -112,7 +103,7 @@ export class WebServer {
             console.log(socket.id)
             socket.emit("returnTemperatureAndHumidity", data)})
     }
-
+    
 
 }
 
