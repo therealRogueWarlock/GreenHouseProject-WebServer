@@ -93,7 +93,6 @@ export class WebServer {
     }
 
     
-
     TransmitTempAndHumid(){
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((element) => socket.emit("returnTemperatureAndHumidity", data))
