@@ -9,6 +9,7 @@ import {TempAndHumidity} from './BBBDriverCall/TempAndHumidity.js'
 export class WebServer {
 
     constructor() {
+        this.wtf = "WTF!!!!"
         this.server;
         this.tempAndHumidityReader = new TempAndHumidity("./i2ctest");
     }
@@ -66,7 +67,7 @@ export class WebServer {
             console.log(socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
-
+                console.log(this.wtf);
                 socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
 
             });
