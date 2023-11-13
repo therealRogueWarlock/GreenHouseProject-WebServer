@@ -67,7 +67,7 @@ export class WebServer {
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
 
-                socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
+                socket.emit("returnTemperatureAndHumidity", GetTempTest());
 
             });
 
@@ -79,6 +79,9 @@ export class WebServer {
         return this;
     }
 
+    GetTempTest(){
+        return this.tempAndHumidityReader.getTemperatureAndHumidity();
+    }
 
 }
 
