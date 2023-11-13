@@ -65,7 +65,7 @@ export class WebServer {
         socketIo.on('connection', function (socket) {
             console.log(socket.id);
             // Service methodes
-            socket.on('getTemperatureAndHumidity', function (this) {
+            socket.on('getTemperatureAndHumidity', () => {
 
                 socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
 
