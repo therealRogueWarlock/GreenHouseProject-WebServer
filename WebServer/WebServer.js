@@ -2,9 +2,9 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
- // Loading socket io module
-import {Server as SocketServer} from 'socket.io';
-import {TempAndHumidity} from './BBBDriverCall/TempAndHumidity.js'
+// Loading socket io module
+import { Server as SocketServer } from 'socket.io';
+import { TempAndHumidity } from './BBBDriverCall/TempAndHumidity.js'
 
 export class WebServer {
 
@@ -18,7 +18,7 @@ export class WebServer {
 
     InitServer() {
 
-        if(this.server) return;
+        if (this.server) return;
 
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
@@ -28,17 +28,17 @@ export class WebServer {
             var fileExtension = path.extname(filePath);
             var contentType = 'text/html';
             // If and when css is added to the website
-            
-            if(fileExtension == '.css'){
+
+            if (fileExtension == '.css') {
                 contentType = 'text/css';
             }
-            
+
             fs.exists(filePath, function (exists) {
                 if (exists) {
-            
+
                     fs.readFile(filePath, function (error, content) {
                         if (!error) {
-                            
+
                             // Page found, write content
                             res.writeHead(200, { 'content-type': contentType });
                             res.end(content);
@@ -49,7 +49,7 @@ export class WebServer {
                     // Page not found
                     res.writeHead(404);
                     res.end('Page not found!!!');
-                    
+
                 }
             })
         })
@@ -58,9 +58,9 @@ export class WebServer {
         return this;
     }
 
-    StartServer(){
+    StartServer() {
 
-        if(!this.server) return;
+        if (!this.server) return;
         var self = this;
 
         var socketIo = new SocketServer(this.server);
@@ -71,35 +71,46 @@ export class WebServer {
             console.log("Connected:" + socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
-                
+
                 socket.emit("returnTemperatureAndHumidity", TempAndHumidity.getTemperatureAndHumidity());
-                
+
             });
 
-            socket.on('ListenToTempAndHumid',()=>{
+            socket.on('ListenToTempAndHumid', () => {
                 self.listeners.get("ListenToTempAndHumid").push(socket)
-            })
+            });
+
+            socket.on("disconnect", (reason) => {
+                var listenersArray = self.listeners.get("ListenToTempAndHumid");
+                let index = listenersArray.indexOf(socket);
+                if (index !== -1) {
+                    console.log("remove: "+ socket.id + "at:" + index)
+                    listenersArray.splice(index, 1);
+                }
+            });
+
 
         });
 
-        
+
         setInterval(() => {
             self.TransmitTempAndHumid();
-        }, 1000)
-      
+        }, 2000)
+
 
         this.server.listen(8888);
         console.log("Server Running ...");
-        
+
         return this;
     }
 
-    TransmitTempAndHumid(){
+    TransmitTempAndHumid() {
         console.log("get temp...")
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((socket) => {
             console.log(socket.id)
-            socket.emit("returnTemperatureAndHumidity", data)})
+            socket.emit("returnTemperatureAndHumidity", data)
+        })
     }
 
 
