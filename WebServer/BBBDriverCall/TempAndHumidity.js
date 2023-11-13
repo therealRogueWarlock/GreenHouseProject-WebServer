@@ -2,13 +2,10 @@ import {CommandCaller} from "./CommandCaller.js"
 
 export class TempAndHumidity{
 
-    constructor (execFileName){
-        console.log(execFileName);
-        this.execFileName = execFileName;
-    }
-
-    getTemperatureAndHumidity() {
-        var out = CommandCaller.systemSync(this.execFileName);
+    static execFileName = "./i2ctest";
+    
+    static getTemperatureAndHumidity() {
+        var out = CommandCaller.systemSync(execFileName);
         console.log("out:" + out)
         return out;
     }

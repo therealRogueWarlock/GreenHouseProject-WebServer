@@ -11,7 +11,6 @@ export class WebServer {
     constructor() {
         this.wtf = "WTF!!!!"
         this.server;
-        this.tempAndHumidityReader = new TempAndHumidity("./i2ctest");
     }
 
     InitServer() {
@@ -63,12 +62,13 @@ export class WebServer {
         
         var socketIo = new SocketServer(this.server);
         // When communication is established
+
         socketIo.on('connection', function (socket) {
             console.log(socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
                 console.log(this.wtf);
-                socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
+                socket.emit("returnTemperatureAndHumidity", TempAndHumidity.getTemperatureAndHumidity());
 
             });
 
