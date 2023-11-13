@@ -1,4 +1,4 @@
 import WebServer from "WebServer/WebServer"
 
 
-WebServer().InitServer();
+WebServer().InitServer().StartServer();

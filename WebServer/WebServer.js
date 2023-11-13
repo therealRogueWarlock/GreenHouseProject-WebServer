@@ -41,7 +41,7 @@ class WebServer {
                     res.end('Page not found');
                 }
             })
-        }).listen(8888);
+        })
 
         // Loading socket io module
         var io = require('socket.io')(server);
@@ -58,9 +58,16 @@ class WebServer {
 
         });
 
+        return this.server;
+    }
+
+    StartServer(){
+        this.server.listen(8888);
         console.log("Server Running ...");
         return this.server;
     }
+
+
 }
 
 

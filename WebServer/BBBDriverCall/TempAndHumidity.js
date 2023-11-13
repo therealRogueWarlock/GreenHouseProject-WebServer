@@ -4,12 +4,10 @@ class TempAndHumidity{
 
     constructor (execFileName){
         this.execFileName = execFileName;
-
-
     }
 
     getTemperatureAndHumidity() {
-        return CommandCaller.systemSync( this.execFileName)
+        return CommandCaller.systemSync(this.execFileName)
     }
 
 }
