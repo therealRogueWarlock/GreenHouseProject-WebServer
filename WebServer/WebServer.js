@@ -88,6 +88,7 @@ export class WebServer {
         var self = this;
         setTimeout(function next() {
 
+            console.log("loop")
             // Do something...
             self.TransmitTempAndHumid();
 
@@ -95,7 +96,7 @@ export class WebServer {
             setTimeout(next, 500);
         
         }, 500);
-        
+
         this.server.listen(8888);
         console.log("Server Running ...");
         
@@ -103,6 +104,7 @@ export class WebServer {
     }
 
     TransmitTempAndHumid(){
+        console.log("get temp...")
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((socket) => socket.emit("returnTemperatureAndHumidity", data))
     }
