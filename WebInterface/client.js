@@ -34,6 +34,8 @@ function GetCurrentDateTime(){
     return dateTime;
 }
 
+socket.emit("getTemperatureAndHumidity");
+
 setInterval(()=>{
     socket.emit("getTemperatureAndHumidity")
 }, 1000);

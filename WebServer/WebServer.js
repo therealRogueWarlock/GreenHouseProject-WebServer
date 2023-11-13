@@ -9,7 +9,9 @@ import {TempAndHumidity} from './BBBDriverCall/TempAndHumidity.js'
 export class WebServer {
 
     constructor() {
-        
+        var listeners = new Map();
+        listeners.set("ListenToTempAndHumid", [])
+
         this.server;
     }
 
@@ -64,23 +66,40 @@ export class WebServer {
         // When communication is established
 
         socketIo.on('connection', function (socket) {
+
+
             console.log(socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
                 
                 socket.emit("returnTemperatureAndHumidity", TempAndHumidity.getTemperatureAndHumidity());
-
+                
             });
+
+            socket.on('ListenToTempAndHumid',()=>{
+                this.listeners.get("ListenToTempAndHumid").push(socket)
+            })
 
         });
 
         this.server.listen(8888);
         console.log("Server Running ...");
         
+        setInterval(()=>{
+            TransmitTempAndHumid();
+        }, 1000);
+
         return this;
     }
 
     
+
+    TransmitTempAndHumid(){
+        var data = TempAndHumidity.getTemperatureAndHumidity();
+        this.listeners.get("ListenToTempAndHumid").forEach((element) => socket.emit("returnTemperatureAndHumidity", data))
+
+    }
+
 
 }
 
