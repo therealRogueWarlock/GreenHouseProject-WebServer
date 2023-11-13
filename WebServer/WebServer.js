@@ -1,11 +1,15 @@
-//Loading modules
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-var child_process = require('child_process');
 
 export class WebServer {
+
+    
+
     constructor() {
+        //Loading modules
+        this.http = require('http');
+        this.fs = require('fs');
+        this.path = require('path');
+        this.child_process = require('child_process');
+
         this.server;
     }
 
