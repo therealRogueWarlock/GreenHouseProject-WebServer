@@ -17,7 +17,10 @@ export class WebServer {
 
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
-            var file = './WebInterface' + ((req.url == '/') ? '/WebInterface/index.html' : req.url);
+            console.log(req)
+
+            console.log(res)
+            var file = '.' + ((req.url == '/') ? '/WebInterface/index.html' : req.url);
             var fileExtension = path.extname(file);
             var contentType = 'text/html';
             // If and when css is added to the website
@@ -54,7 +57,7 @@ export class WebServer {
     StartServer(){
 
         if(!this.server) return;
-
+        
         var socketIo = new SocketServer(this.server);
         // When communication is established
         socketIo.on('connection', function (socket) {
