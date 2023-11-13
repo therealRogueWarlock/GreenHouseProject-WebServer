@@ -1,4 +1,4 @@
-import CommandCaller from "./CommandCaller.js"
+import CommandCaller from "./CommandCaller.mjs"
 
 export class TempAndHumidity{
 
