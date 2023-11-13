@@ -23,11 +23,11 @@ export class WebServer {
             var fileExtension = path.extname(file);
             var contentType = 'text/html';
             // If and when css is added to the website
-            
+            /*
             if(fileExtension == '.css'){
                 contentType = 'text/css';
             }
-
+            */
             fs.exists(file, function (exists) {
                 if (exists) {
                     fs.readFile(file, function (error, content) {
