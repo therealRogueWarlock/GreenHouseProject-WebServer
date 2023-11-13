@@ -88,10 +88,7 @@ export class WebServer {
                     listenersArray.splice(index, 1);
                 }
             });
-
-
         });
-
 
         setInterval(() => {
             self.TransmitTempAndHumid();
@@ -105,10 +102,16 @@ export class WebServer {
     }
 
     TransmitTempAndHumid() {
+        var listenersArray = self.listeners.get("ListenToTempAndHumid");
+        
+        if (listenersArray.length < 1) return;
+
         console.log("get temp...")
+
         var data = TempAndHumidity.getTemperatureAndHumidity();
-        this.listeners.get("ListenToTempAndHumid").forEach((socket) => {
-            console.log(socket.id)
+        
+        listenersArray.forEach((socket) => {
+            console.log("Brordcast to " + socket.id)
             socket.emit("returnTemperatureAndHumidity", data)
         })
     }
