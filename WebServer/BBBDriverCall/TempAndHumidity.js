@@ -3,12 +3,14 @@ import {CommandCaller} from "./CommandCaller.js"
 export class TempAndHumidity{
 
     constructor (execFileName){
-        console.log(execFileName)
+        console.log(execFileName);
         this.execFileName = execFileName;
     }
 
     getTemperatureAndHumidity() {
-        return CommandCaller.systemSync(this.execFileName)
+        var out = CommandCaller.systemSync(this.execFileName);
+        console.log("out:" + out)
+        return out;
     }
 
 }
