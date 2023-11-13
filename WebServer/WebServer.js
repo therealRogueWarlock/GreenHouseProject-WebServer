@@ -18,8 +18,15 @@ export class WebServer {
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
             console.log(req.url)
-            var file = '.' + ((req.url == '/') ? '/WebInterface/index.html' : req.url);
-            var fileExtension = path.extname(file);
+            var file = '.' + ((req.url == '/') ? '/index.html' : req.url);
+            var rootPath = "/WebInterface"
+            
+            console.log(file)
+
+            var filePath = rootPath + file;
+            console.log(rootPath+file)
+
+            var fileExtension = path.extname(filePath);
             var contentType = 'text/html';
             // If and when css is added to the website
             
@@ -27,10 +34,10 @@ export class WebServer {
                 contentType = 'text/css';
             }
             
-            fs.exists(file, function (exists) {
+            fs.exists(filePath, function (exists) {
                 if (exists) {
             
-                    fs.readFile(file, function (error, content) {
+                    fs.readFile(filePath, function (error, content) {
                         if (!error) {
                             
                             // Page found, write content
