@@ -2,6 +2,8 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+ // Loading socket io module
+import io from 'socket.io';
 
 export class WebServer {
 
@@ -44,10 +46,10 @@ export class WebServer {
         })
 
         // Loading socket io module
-        var io = require('socket.io')(server);
+        var socketIo = new io(server);
 
         // When communication is established
-        io.on('connection', function (socket) {
+        socketIo.on('connection', function (socket) {
             console.log(socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
