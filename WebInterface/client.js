@@ -18,7 +18,7 @@ socket.on("returnTemperatureAndHumidity", (data) => {
 
     temperatureValue = jsonObject.Temperature/10;
     humidityValue = jsonObject.Humidity;
-
+    var dateTime = GetCurrentDateTime();
     document.getElementById("tempValue").innerHTML = temperatureValue;
     document.getElementById("tempTime").innerHTML = dateTime;
     document.getElementById("humidValue").innerHTML = humidityValue;

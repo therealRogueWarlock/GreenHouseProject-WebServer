@@ -6,7 +6,6 @@ export class TempAndHumidity{
     
     static getTemperatureAndHumidity() {
         var out = CommandCaller.systemSync(TempAndHumidity.execFileName);
-        console.log("out:" + out)
         return out;
     }
 

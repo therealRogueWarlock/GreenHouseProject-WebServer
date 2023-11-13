@@ -4,7 +4,6 @@ export class CommandCaller{
 
 
     static systemSync(cmd) {
-        console.log("cmd" + cmd)
         return child_process.execSync(cmd).toString();
     }
 
