@@ -1,1 +1,1 @@
-Web server from beagle bone
+Web server for beagle bone
