@@ -28,19 +28,14 @@ export class WebServer {
                 contentType = 'text/css';
             }
             */
-            fs.exists(file, function (exists) {
-                if (exists) {
-                    console.log("file exists")
-                    fs.readFile(file, function (error, content) {
-                        if (!error) {
-                            console.log("error on load")
-                            // Page found, write content
-                            res.writeHead(200, { 'content-type': contentType });
-                            res.end(content);
-                        }
-                    })
-                }
-                else {
+
+            fs.readFile(file, function (error, content) {
+                if (!error) {
+                    console.log("error on load")
+                    // Page found, write content
+                    res.writeHead(200, { 'content-type': contentType });
+                    res.end(content);
+                }else {
                     // Page not found
                     res.writeHead(404);
                     console.log("file does not exist")
