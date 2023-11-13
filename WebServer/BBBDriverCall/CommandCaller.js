@@ -1,5 +1,5 @@
 
-class CommandCaller{
+export class CommandCaller{
     static systemSync(cmd) {
         return child_process.execSync(cmd).toString();
     }

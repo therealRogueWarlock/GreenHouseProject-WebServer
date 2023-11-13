@@ -1,6 +1,6 @@
-import CommandCaller from "./CommandCaller"
+import CommandCaller from "./CommandCaller.js"
 
-class TempAndHumidity{
+export class TempAndHumidity{
 
     constructor (execFileName){
         this.execFileName = execFileName;

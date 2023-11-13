@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
 
-class WebServer {
+export class WebServer {
     constructor() {
         this.server;
     }
