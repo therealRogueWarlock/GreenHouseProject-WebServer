@@ -97,7 +97,7 @@ export class WebServer {
         
         }, 500);
 
-        
+
 
         this.server.listen(8888);
         console.log("Server Running ...");
@@ -108,7 +108,9 @@ export class WebServer {
     TransmitTempAndHumid(){
         console.log("get temp...")
         var data = TempAndHumidity.getTemperatureAndHumidity();
-        this.listeners.get("ListenToTempAndHumid").forEach((socket) => socket.emit("returnTemperatureAndHumidity", data))
+        this.listeners.get("ListenToTempAndHumid").forEach((socket) => {
+            console.log(socket.id)
+            socket.emit("returnTemperatureAndHumidity", data)})
     }
 
 
