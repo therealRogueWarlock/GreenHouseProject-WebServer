@@ -86,7 +86,7 @@ export class WebServer {
         console.log("Server Running ...");
         
         setInterval(()=>{
-            TransmitTempAndHumid();
+            this.TransmitTempAndHumid();
         }, 1000);
 
         return this;
@@ -96,7 +96,6 @@ export class WebServer {
     TransmitTempAndHumid(){
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((element) => socket.emit("returnTemperatureAndHumidity", data))
-
     }
 
 
