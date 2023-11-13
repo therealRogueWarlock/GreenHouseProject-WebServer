@@ -5,9 +5,9 @@ export class WebServer {
 
     constructor() {
         //Loading modules
-        this.http = require('../node_modules/http');
-        this.fs = require('../node_modules/fs');
-        this.path = require('../node_modules/path');
+        this.http = require('http');
+        this.fs = require('fs');
+        this.path = require('path');
         
         this.server;
     }
