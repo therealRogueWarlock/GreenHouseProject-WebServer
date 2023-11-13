@@ -3,7 +3,7 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
  // Loading socket io module
-import io from 'socket.io';
+import {io} from 'socket.io';
 
 export class WebServer {
 
