@@ -17,7 +17,7 @@ export class WebServer {
 
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
-            console.log(req.url);
+        
             var file = '' + ((req.url == '/') ? '../WebInterface/index.html' : req.url);
             console.log(file);
             var fileExtension = path.extname(file);
@@ -29,7 +29,7 @@ export class WebServer {
             }
             */
 
-            fs.readFile(file, function (error, content) {
+            fs.readFile("index.html", function (error, content) {
                 if (!error) {
                     console.log("error on load")
                     // Page found, write content
