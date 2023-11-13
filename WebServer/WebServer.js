@@ -1,12 +1,11 @@
 
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+
 export class WebServer {
 
     constructor() {
-        //Loading modules
-        this.http = require('http');
-        this.fs = require('fs');
-        this.path = require('path');
-        
         this.server;
     }
 
