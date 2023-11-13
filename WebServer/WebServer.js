@@ -4,11 +4,13 @@ import fs from 'fs';
 import path from 'path';
  // Loading socket io module
 import {Server as SocketServer} from 'socket.io';
+import TempAndHumidity from 'TempAndHumidity.js'
 
 export class WebServer {
 
     constructor() {
         this.server;
+        this.tempAndHumidityReader = new TempAndHumidity();
     }
 
     InitServer() {
@@ -65,7 +67,7 @@ export class WebServer {
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
 
-                socket.emit("returnTemperatureAndHumidity", getTemperatureAndHumidity());
+                socket.emit("returnTemperatureAndHumidity", this.tempAndHumidityReader.getTemperatureAndHumidity());
 
             });
 
