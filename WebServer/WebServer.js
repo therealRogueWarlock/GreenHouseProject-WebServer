@@ -3,7 +3,7 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
  // Loading socket io module
-import {Server as socketServer} from 'socket.io';
+import {Server as SocketServer} from 'socket.io';
 
 export class WebServer {
 
@@ -17,9 +17,7 @@ export class WebServer {
 
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
-            console.log(req.url);
             var file = '.' + ((req.url == '/') ? '/WebInterface/index.html' : req.url);
-            console.log(file);
             var fileExtension = path.extname(file);
             var contentType = 'text/html';
             // If and when css is added to the website
@@ -49,9 +47,15 @@ export class WebServer {
             })
         })
 
-        // Loading socket io module
-        var socketIo = new socketServer(this.server);
 
+        return this;
+    }
+
+    StartServer(){
+        this.server.listen(8888);
+        console.log("Server Running ...");
+        
+        var socketIo = SocketServer(this.server);
         // When communication is established
         socketIo.on('connection', function (socket) {
             console.log(socket.id);
@@ -64,12 +68,6 @@ export class WebServer {
 
         });
 
-        return this;
-    }
-
-    StartServer(){
-        this.server.listen(8888);
-        console.log("Server Running ...");
         return this;
     }
 
