@@ -22,7 +22,6 @@ export class WebServer {
 
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
-            console.log(req.url)
             var file = ((req.url == '/') ? '/index.html' : req.url);
             var rootPath = "./WebInterface"
             var filePath = rootPath + file;
@@ -69,8 +68,7 @@ export class WebServer {
 
         socketIo.on('connection', function (socket) {
 
-
-            console.log(socket.id);
+            console.log("Connected:" + socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
                 
@@ -97,6 +95,7 @@ export class WebServer {
     }
 
     TransmitTempAndHumid(){
+        console.log("get temp...")
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((socket) => {
             console.log(socket.id)
