@@ -5,7 +5,7 @@ export class TempAndHumidity{
     static execFileName = "./i2ctest";
     
     static getTemperatureAndHumidity() {
-        var out = CommandCaller.systemSync(execFileName);
+        var out = CommandCaller.systemSync(TempAndHumidity.execFileName);
         console.log("out:" + out)
         return out;
     }

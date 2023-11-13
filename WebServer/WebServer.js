@@ -9,7 +9,7 @@ import {TempAndHumidity} from './BBBDriverCall/TempAndHumidity.js'
 export class WebServer {
 
     constructor() {
-        this.wtf = "WTF!!!!"
+        
         this.server;
     }
 
@@ -67,7 +67,7 @@ export class WebServer {
             console.log(socket.id);
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
-                console.log(this.wtf);
+                
                 socket.emit("returnTemperatureAndHumidity", TempAndHumidity.getTemperatureAndHumidity());
 
             });
