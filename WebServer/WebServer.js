@@ -3,7 +3,7 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
  // Loading socket io module
-import {Server as socketIo} from 'socket.io';
+import {Server as socketServer} from 'socket.io';
 
 export class WebServer {
 
@@ -46,7 +46,7 @@ export class WebServer {
         })
 
         // Loading socket io module
-        var socketIo = new io(server);
+        var socketIo = new socketServer(server);
 
         // When communication is established
         socketIo.on('connection', function (socket) {
