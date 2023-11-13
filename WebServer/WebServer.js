@@ -84,11 +84,10 @@ export class WebServer {
 
         });
 
-        let i = 0;
+        
         setInterval(() => {
-            console.log('Infinite Loop Test interval n:', i++);
             self.TransmitTempAndHumid();
-        }, 2000)
+        }, 1000)
       
 
         this.server.listen(8888);
@@ -98,10 +97,8 @@ export class WebServer {
     }
 
     TransmitTempAndHumid(){
-        console.log("get temp...")
         var data = TempAndHumidity.getTemperatureAndHumidity();
         this.listeners.get("ListenToTempAndHumid").forEach((socket) => {
-            console.log(socket.id)
             socket.emit("returnTemperatureAndHumidity", data)})
     }
 
