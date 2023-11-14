@@ -86,7 +86,7 @@ export class WebServer {
             socket.on('setLightIntensity', (data) => {
 
                 Greenhouse.setLightIntensity(data)
-                
+
                 socket.emit("returnEvent", data);
 
             });
@@ -97,7 +97,7 @@ export class WebServer {
             });
 
             socket.on("disconnect", (reason) => {
-                this.removeSocketListner(socket)
+                self.removeSocketListner(socket)
             });
         });
 
