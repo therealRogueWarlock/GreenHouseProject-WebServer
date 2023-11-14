@@ -13,6 +13,8 @@ export class WebServer {
 
         this.listeners.set("ListenToGreenhouseStatus", [])
 
+        this.greenhouseState = {temperatureValue:0,humidityValue:0, heater:0, window:0, lightIntensity:50};
+
         this.server;
     }
 
@@ -79,17 +81,23 @@ export class WebServer {
 
             socket.on('setHeater', (data) => {
                 
+                self.greenhouseState.heater = data;
+
                 socket.emit("returnEvent", data);
 
             });
 
             socket.on('setWindow', (data) => {
                 
+                self.greenhouseState.window = data;
+
                 socket.emit("returnEvent", data);
 
             });
 
             socket.on('setLightIntensity', (data) => {
+                
+                self.greenhouseState.lightIntensity = data;
 
                 Greenhouse.setLightIntensity(data)
 
@@ -126,10 +134,12 @@ export class WebServer {
         ///console.log("get temp...")
 
         var data = Greenhouse.getGreenhouseStatus();
+        this.greenhouseState.humidityValue = data.humidityValue;
+        this.greenhouseState.temperatureValue = data.temperatureValue;
 
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
-            socket.emit("returnGreenhouseStatus", data)
+            socket.emit("returnGreenhouseStatus", this.greenhouseState)
         })
     }
 

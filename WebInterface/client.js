@@ -15,10 +15,12 @@ socket.on("connect", (data) => {
 
 socket.on("returnGreenhouseStatus", (data) => { 
     
-    var greenhouseStatus = JSON.parse(data);
+    var greenhouseState = JSON.parse(data);
 
-    temperatureValue = greenhouseStatus.Temperature/10;
-    humidityValue = greenhouseStatus.Humidity;
+    console.log(greenhouseState);
+
+    temperatureValue = greenhouseState.Temperature/10;
+    humidityValue = greenhouseState.Humidity;
 
     var dateTime = GetCurrentDateTime();
     document.getElementById("tempValue").innerHTML = temperatureValue;
