@@ -14,16 +14,11 @@ socket.on("connect", (data) => {
 
 
 socket.on("returnGreenhouseStatus", (greenhouseState) => { 
-    
-    console.log(greenhouseState);
-
-    temperatureValue = greenhouseState.Temperature/10;
-    humidityValue = greenhouseState.Humidity;
 
     var dateTime = GetCurrentDateTime();
-    document.getElementById("tempValue").innerHTML = temperatureValue;
-    document.getElementById("humidValue").innerHTML = humidityValue;
     document.getElementById("updateTime").innerHTML = dateTime;
+    document.getElementById("tempValue").innerHTML = greenhouseState.temperatureValue/10;
+    document.getElementById("humidValue").innerHTML = greenhouseState.humidityValue;
     document.getElementById("LightIntensity").value = greenhouseState.lightIntensity;
     document.getElementById("windowCheck").checked = greenhouseState.window;
     document.getElementById("heaterCheck").checked = greenhouseState.heater;
