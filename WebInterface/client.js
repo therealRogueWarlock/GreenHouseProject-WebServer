@@ -49,8 +49,6 @@ socket.emit("ListenToGreenhouseStatus");
 function toggleHeater() {
     // Get the checkbox
     var checkBox = document.getElementById("heaterCheck");
-   
-    // If the checkbox is checked, display the output text
     if (checkBox.checked == true){
         socket.emit("setHeater", 1);
     } else {
@@ -59,9 +57,7 @@ function toggleHeater() {
 }
 
 function lightSlider() {
-    // Get the checkbox
-    var lightInput = document.getElementById("LightIntensity");
-    console.log("Light: " + lightInput.value)
-    socket.on('setLightIntensity', lightInput.value);
     
+    var lightInput = document.getElementById("LightIntensity");
+    socket.emit('setLightIntensity', lightInput.value);
 }
