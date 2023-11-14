@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-color: rgb(70, 252, 206);
   }
   
   h1 {
@@ -18,9 +18,6 @@ body {
   margin: 4px 2px;
   cursor: pointer;
 }
-
-.button1 {background-color: #04AA6D;} /* Green */
-.button2 {background-color: #008CBA;} /* Blue */
 
 /* The switch - the box around the slider */
 .switch {
