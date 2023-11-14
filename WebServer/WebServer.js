@@ -137,8 +137,8 @@ export class WebServer {
         var dataJson = JSON.parse(data);
         console.log(data);
         console.log(dataJson);
-        this.greenhouseState.humidityValue = dataJson.humidityValue;
-        this.greenhouseState.temperatureValue = dataJson.temperatureValue;
+        this.greenhouseState.humidityValue = dataJson.Humidity;
+        this.greenhouseState.temperatureValue = dataJson.Temperature;
         console.log(this.greenhouseState);
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
