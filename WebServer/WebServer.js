@@ -139,7 +139,7 @@ export class WebServer {
         console.log(dataJson);
         this.greenhouseState.humidityValue = dataJson.humidityValue;
         this.greenhouseState.temperatureValue = dataJson.temperatureValue;
-
+        console.log(this.greenhouseState);
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)
