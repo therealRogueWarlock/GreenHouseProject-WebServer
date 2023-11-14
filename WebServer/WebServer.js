@@ -117,7 +117,7 @@ export class WebServer {
 
         setInterval(() => {
             self.transmitGreenhouseStatus();
-        }, 2000)
+        }, 1500)
 
 
         this.server.listen(8888);
@@ -131,15 +131,12 @@ export class WebServer {
         
         if (listenersArray.length < 1) return;
 
-        ///console.log("get temp...")
-
         var data = Greenhouse.getGreenhouseStatus();
         var dataJson = JSON.parse(data);
-        console.log(data);
-        console.log(dataJson);
+
         this.greenhouseState.humidityValue = dataJson.Humidity;
         this.greenhouseState.temperatureValue = dataJson.Temperature;
-        console.log(this.greenhouseState);
+
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)
