@@ -46,17 +46,15 @@ function GetCurrentDateTime(){
 
 socket.emit("ListenToGreenhouseStatus");
 
-function toggleHeater(checkBox) {
+function toggleHeater() {
     // Get the checkbox
-    var checkBox = document.getElementById("checkbox");
-    // Get the output text
-    var text = document.getElementById("text");
-  
+    var checkBox = document.getElementById("heaterCheck");
+   
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true){
-      text.style.display = "block";
+        socket.emit("setHeater", 1);
     } else {
-      text.style.display = "none";
+        socket.emit("setHeater", 0);
     }
-  }
+}
 

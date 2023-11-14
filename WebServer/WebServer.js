@@ -77,7 +77,7 @@ export class WebServer {
 
             });
 
-            socket.on('toggleHeater', () => {
+            socket.on('setHeater', () => {
 
                 
                 socket.emit("returnEvent", "toggleHeater");

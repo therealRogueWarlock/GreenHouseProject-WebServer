@@ -5,7 +5,7 @@ export class Greenhouse{
     static execFileName = "./WebServer/i2ctest";
     
     static getGreenhouseStatus() {
-        var out = CommandCaller.systemSync(TempAndHumidity.execFileName);
+        var out = CommandCaller.systemSync(Greenhouse.execFileName);
         return out;
     }
 s
