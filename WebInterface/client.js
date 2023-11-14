@@ -26,7 +26,9 @@ socket.on("returnGreenhouseStatus", (data) => {
     document.getElementById("tempValue").innerHTML = temperatureValue;
     document.getElementById("humidValue").innerHTML = humidityValue;
     document.getElementById("updateTime").innerHTML = dateTime;
-    
+    document.getElementById("LightIntensity").value = greenhouseState.lightIntensity;
+    document.getElementById("windowCheck").checked = greenhouseState.window;
+    document.getElementById("heaterCheck").checked = greenhouseState.heater;
 });
 
 socket.on("returnEvent", (data) => { 
