@@ -13,7 +13,7 @@ export class WebServer {
 
         this.listeners.set("ListenToGreenhouseStatus", [])
 
-        this.greenhouseState = {"temperatureValue":0,"humidityValue":0, "heater":0, "window":0," lightIntensity":50};
+        this.greenhouseState = {"temperatureValue":0,"humidityValue":0, "heater":0, "window":0, "lightIntensity":50};
 
         this.server;
     }

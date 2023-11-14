@@ -14,7 +14,8 @@ socket.on("connect", (data) => {
 
 
 socket.on("returnGreenhouseStatus", (data) => { 
-    
+    console.log(data);
+
     var greenhouseState = JSON.parse(data);
 
     console.log(greenhouseState);
