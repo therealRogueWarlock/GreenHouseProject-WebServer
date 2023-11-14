@@ -13,7 +13,7 @@ export class WebServer {
 
         this.listeners.set("ListenToGreenhouseStatus", [])
 
-        this.greenhouseState = {"temperatureValue":0,"humidityValue":0, "heater":0, "window":0, "lightIntensity":50};
+        this.greenhouseState = {"temperatureValue":0, "humidityValue":0 , "heater":0 , "window":0, "lightIntensity": 0};
 
         this.server;
     }
@@ -135,9 +135,11 @@ export class WebServer {
 
         var data = Greenhouse.getGreenhouseStatus();
         var dataJson = JSON.parse(data);
+        console.log(data);
+        console.log(dataJson);
         this.greenhouseState.humidityValue = dataJson.humidityValue;
         this.greenhouseState.temperatureValue = dataJson.temperatureValue;
-            
+
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)
