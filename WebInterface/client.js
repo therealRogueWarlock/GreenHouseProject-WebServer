@@ -15,7 +15,6 @@ socket.on("connect", (data) => {
     console.log(socket.id); 
 });
 
-document.getElementById("Heater").addEventListener("click", ()=>socket.emit("toggleHeater"));
 
 
 socket.on("returnGreenhouseStatus", (data) => { 
@@ -46,4 +45,18 @@ function GetCurrentDateTime(){
 }
 
 socket.emit("ListenToGreenhouseStatus");
+
+function toggleHeater(checkBox) {
+    // Get the checkbox
+    var checkBox = document.getElementById("checkbox");
+    // Get the output text
+    var text = document.getElementById("text");
+  
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
 
