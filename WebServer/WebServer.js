@@ -90,7 +90,7 @@ export class WebServer {
             });
 
             socket.on("disconnect", (reason) => {
-                removeSocketListner(socket)
+                this.removeSocketListner(socket)
             });
         });
 
