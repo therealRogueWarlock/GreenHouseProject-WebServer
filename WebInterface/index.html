@@ -16,13 +16,13 @@
         </div>
 
         <div>
-            <input type="range" id="LightIntensity" name="volume" min="0" max="100" />
+            <input type="range" id="LightIntensity" name="volume" min="0" max="100" onchange="lightSlider()"/>
             <label for="LightIntensity">Light Intensity</label>
         </div>       
 
         <!-- Rectangular switch -->
         <label class="switch">
-            <input id="heaterCheck" type="checkbox" onclick="toggleHeater(this)">
+            <input id="heaterCheck" type="checkbox" onclick="toggleHeater()">
             <span class="toggleSlider"></span>
         </label>
 

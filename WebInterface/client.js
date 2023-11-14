@@ -58,3 +58,10 @@ function toggleHeater() {
     }
 }
 
+function lightSlider() {
+    // Get the checkbox
+    var lightInput = document.getElementById("LightIntensity");
+    
+    socket.on('setLightIntensity', lightInput.value);
+    
+}

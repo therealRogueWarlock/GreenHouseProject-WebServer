@@ -77,10 +77,15 @@ export class WebServer {
 
             });
 
-            socket.on('setHeater', () => {
-
+            socket.on('setHeater', (data) => {
                 
-                socket.emit("returnEvent", "toggleHeater");
+                socket.emit("returnEvent", data);
+
+            });
+
+            socket.on('setLightIntensity', (data) => {
+                
+                socket.emit("returnEvent", data);
 
             });
 
@@ -110,12 +115,12 @@ export class WebServer {
         
         if (listenersArray.length < 1) return;
 
-        console.log("get temp...")
+        ///console.log("get temp...")
 
         var data = Greenhouse.getGreenhouseStatus();
 
         listenersArray.forEach((socket) => {
-            console.log("Brordcast to " + socket.id)
+            //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", data)
         })
     }
