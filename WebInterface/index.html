@@ -9,24 +9,32 @@
     </head>
     <body>
         <div id="MainContent">
-            <h1>Current Climate</h1>
-            <h2>Temperature: <h3 id="tempValue"></h3> Degree celsius <h3 id="tempTime"></h3></h2>
-            <h2>Humidity: <h3 id="humidValue"></h3> Percent <h3 id="humidTime"></h3></h2>
-            <h2>Light Intensity: <h3 id="lightValue"></h3> Percent <h3 id="humidTime"></h3></h2>
+            <h1>Current Climate: <h3 id="updateTime"></h3></h1>
+            <h2>Temperature: <h3 id="tempValue"></h3> Degree celsius </h2>
+            <h2>Humidity: <h3 id="humidValue"></h3> Percent </h2>
+            
         </div>
 
         <div>
+            <h2>Light Intensity:</h2>
             <input type="range" id="LightIntensity" name="volume" min="0" max="100" onchange="lightSlider()"/>
             <label for="LightIntensity">Light Intensity</label>
         </div>       
 
-        <!-- Rectangular switch -->
-        <label class="switch">
-            <input id="heaterCheck" type="checkbox" onclick="toggleHeater()">
-            <span class="toggleSlider"></span>
-        </label>
+        <div> 
+            <h2>Heater:</h2>
+            <label class="switch">
+                <input id="heaterCheck" type="checkbox" onclick="toggleHeater()">
+                <span class="toggleSlider"></span>
+            </label>
+        </div>
 
-        <button id="Heater" class="button button1">Green</button>
-
+        <div> 
+            <h2>Window:</h2>
+            <label class="switch">
+                <input id="windowCheck" type="checkbox" onclick="toggleWindow()">
+                <span class="toggleSlider"></span>
+            </label>
+        </div>
     </body>
 </html>

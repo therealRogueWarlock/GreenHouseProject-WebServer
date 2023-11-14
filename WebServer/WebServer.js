@@ -83,6 +83,12 @@ export class WebServer {
 
             });
 
+            socket.on('setWindow', (data) => {
+                
+                socket.emit("returnEvent", data);
+
+            });
+
             socket.on('setLightIntensity', (data) => {
 
                 Greenhouse.setLightIntensity(data)
