@@ -61,7 +61,7 @@ function toggleHeater() {
 function lightSlider() {
     // Get the checkbox
     var lightInput = document.getElementById("LightIntensity");
-    
+    console.log("Light: " + lightInput.value)
     socket.on('setLightIntensity', lightInput.value);
     
 }
