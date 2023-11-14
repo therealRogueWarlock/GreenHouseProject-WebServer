@@ -13,12 +13,8 @@ socket.on("connect", (data) => {
 });
 
 
-socket.on("returnGreenhouseStatus", (data) => { 
+socket.on("returnGreenhouseStatus", (greenhouseState) => { 
     
-    console.log(data);
-
-    var greenhouseState = JSON.parse(data);
-
     console.log(greenhouseState);
 
     temperatureValue = greenhouseState.Temperature/10;
