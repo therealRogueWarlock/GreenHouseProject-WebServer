@@ -1,12 +1,12 @@
 import {CommandCaller} from "./CommandCaller.js"
 
-export class TempAndHumidity{
+export class Greenhouse{
 
     static execFileName = "./WebServer/i2ctest";
     
-    static getTemperatureAndHumidity() {
+    static getGreenhouseStatus() {
         var out = CommandCaller.systemSync(TempAndHumidity.execFileName);
         return out;
     }
-
+s
 }

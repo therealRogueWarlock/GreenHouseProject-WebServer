@@ -12,6 +12,21 @@
             <h1>Current Climate</h1>
             <h2>Temperature: <h3 id="tempValue"></h3> Degree celsius <h3 id="tempTime"></h3></h2>
             <h2>Humidity: <h3 id="humidValue"></h3> Percent <h3 id="humidTime"></h3></h2>
+            <h2>Light Intensity: <h3 id="lightValue"></h3> Percent <h3 id="humidTime"></h3></h2>
         </div>
+
+        <div>
+            <input type="range" id="LightIntensity" name="volume" min="0" max="100" />
+            <label for="LightIntensity">Light Intensity</label>
+        </div>       
+
+        <!-- Rectangular switch -->
+        <label class="switch">
+            <input type="checkbox">
+            <span class="toggleSlider"></span>
+        </label>
+
+        <button id="Heater" class="button button1">Green</button>
+
     </body>
 </html>

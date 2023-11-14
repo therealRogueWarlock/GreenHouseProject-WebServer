@@ -4,19 +4,19 @@ import fs from 'fs';
 import path from 'path';
 // Loading socket io module
 import { Server as SocketServer } from 'socket.io';
-import { TempAndHumidity } from './BBBDriverCall/TempAndHumidity.js'
+import { Greenhouse } from './BBBDriverCall/Greenhouse.js'
 
 export class WebServer {
 
     constructor() {
         this.listeners = new Map();
 
-        this.listeners.set("ListenToTempAndHumid", [])
+        this.listeners.set("ListenToGreenhouseStatus", [])
 
         this.server;
     }
 
-    InitServer() {
+    initServer() {
 
         if (this.server) return;
 
@@ -58,7 +58,7 @@ export class WebServer {
         return this;
     }
 
-    StartServer() {
+    startServer() {
 
         if (!this.server) return;
         var self = this;
@@ -69,6 +69,7 @@ export class WebServer {
         socketIo.on('connection', function (socket) {
 
             console.log("Connected:" + socket.id);
+
             // Service methodes
             socket.on('getTemperatureAndHumidity', () => {
 
@@ -76,22 +77,25 @@ export class WebServer {
 
             });
 
-            socket.on('ListenToTempAndHumid', () => {
-                self.listeners.get("ListenToTempAndHumid").push(socket)
+            socket.on('toggleHeater', () => {
+
+                
+                socket.emit("returnEvent", "toggleHeater");
+
+            });
+
+
+            socket.on('ListenToGreenhouseStatus', () => {
+                self.listeners.get("ListenToGreenhouseStatus").push(socket)
             });
 
             socket.on("disconnect", (reason) => {
-                var listenersArray = self.listeners.get("ListenToTempAndHumid");
-                let index = listenersArray.indexOf(socket);
-                if (index !== -1) {
-                    console.log("remove: "+ socket.id + "at:" + index)
-                    listenersArray.splice(index, 1);
-                }
+                removeSocketListner(socket)
             });
         });
 
         setInterval(() => {
-            self.TransmitTempAndHumid();
+            self.transmitGreenhouseStatus();
         }, 2000)
 
 
@@ -101,19 +105,31 @@ export class WebServer {
         return this;
     }
 
-    TransmitTempAndHumid() {
-        var listenersArray = this.listeners.get("ListenToTempAndHumid");
+    transmitGreenhouseStatus() {
+        var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
         
         if (listenersArray.length < 1) return;
 
         console.log("get temp...")
 
-        var data = TempAndHumidity.getTemperatureAndHumidity();
+        var data = Greenhouse.getGreenhouseStatus();
 
         listenersArray.forEach((socket) => {
             console.log("Brordcast to " + socket.id)
-            socket.emit("returnTemperatureAndHumidity", data)
+            socket.emit("returnGreenhouseStatus", data)
         })
+    }
+
+    removeSocketListner(socket){
+
+        var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
+
+        let index = listenersArray.indexOf(socket);
+        if (index !== -1) {
+            console.log("remove: "+ socket.id + "at:" + index)
+            listenersArray.splice(index, 1);
+        }
+
     }
 
 

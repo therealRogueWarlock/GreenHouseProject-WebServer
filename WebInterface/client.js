@@ -3,6 +3,10 @@ var temperatureValue = 1;
 var humidityValue = 2;
 
 
+
+
+
+
 // Establishing connection with server
 var socket = io.connect();
 // client-side
@@ -11,18 +15,25 @@ socket.on("connect", (data) => {
     console.log(socket.id); 
 });
 
+document.getElementById("Heater").addEventListener("click", ()=>socket.emit("toggleHeater"));
 
-socket.on("returnTemperatureAndHumidity", (data) => { 
+
+socket.on("returnGreenhouseStatus", (data) => { 
     
-    var jsonObject = JSON.parse(data);
+    var greenhouseStatus = JSON.parse(data);
 
-    temperatureValue = jsonObject.Temperature/10;
-    humidityValue = jsonObject.Humidity;
+    temperatureValue = greenhouseStatus.Temperature/10;
+    humidityValue = greenhouseStatus.Humidity;
+
     var dateTime = GetCurrentDateTime();
     document.getElementById("tempValue").innerHTML = temperatureValue;
     document.getElementById("tempTime").innerHTML = dateTime;
     document.getElementById("humidValue").innerHTML = humidityValue;
     document.getElementById("humidTime").innerHTML = dateTime;
+});
+
+socket.on("returnEvent", (data) => { 
+    console.log(data);
 });
 
 
@@ -34,5 +45,5 @@ function GetCurrentDateTime(){
     return dateTime;
 }
 
-socket.emit("ListenToTempAndHumid");
+socket.emit("ListenToGreenhouseStatus");
 
