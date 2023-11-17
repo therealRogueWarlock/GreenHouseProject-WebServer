@@ -2,9 +2,8 @@ import {CommandCaller} from "./CommandCaller.js"
 
 export class Greenhouse{
 
-    static execFileName = "./WebServer/i2ctest";
-    static lightFile = "./WebServer/set_light"
     static greenHouseExecFile = "./WebServer/greenhouse"
+    
     static getGreenhouseStatus() {
         var out = CommandCaller.systemSync(Greenhouse.greenHouseExecFile+ " get_data");
         return out;
