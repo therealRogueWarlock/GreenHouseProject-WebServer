@@ -82,7 +82,7 @@ export class WebServer {
 
             socket.on('setHeater', (data) => {
                 
-                self.greenhouseState.heater = data;
+                Greenhouse.setHeater(data)
 
                 socket.emit("returnEvent", data);
 
@@ -90,8 +90,8 @@ export class WebServer {
 
             socket.on('setWindow', (data) => {
                 
-                self.greenhouseState.window = data;
-
+                Greenhouse.setWindow(data)
+                
                 socket.emit("returnEvent", data);
 
             });
@@ -136,7 +136,7 @@ export class WebServer {
         var dataJson = JSON.parse(data);
 
         this.greenhouseState = dataJson;
-        
+
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)

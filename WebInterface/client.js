@@ -63,6 +63,6 @@ function toggleWindow() {
 
 function lightSlider() {
     
-    var lightInput = document.getElementById("LightIntensity");
+    var lightInput = document.getElementById("ArtificialLightIntensity");
     socket.emit('setLightIntensity', lightInput.value);
 }
