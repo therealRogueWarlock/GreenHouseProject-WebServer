@@ -21,6 +21,7 @@ export class Greenhouse{
     }
 
     static setWindow(value){
+        console.log(Greenhouse.greenHouseExecFile + " window " + value)
         var out = CommandCaller.systemSync(Greenhouse.greenHouseExecFile + " window " + value);
         return out;
     }
