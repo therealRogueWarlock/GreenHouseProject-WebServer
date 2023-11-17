@@ -13,8 +13,9 @@ export class WebServer {
 
         this.listeners.set("ListenToGreenhouseStatus", [])
 
-        this.greenhouseState = {"temperatureValue":0, "humidityValue":0 , "heater":0 , "window":0, "lightIntensity": 0};
+        this.greenhouseState = {"Humidity":0, "Temperature":0, "NaturalLight":0, "WindowStatus":0, "HeaterStatus":0, "LightIntensity":0}
 
+    
         this.server;
     }
 
@@ -134,9 +135,8 @@ export class WebServer {
         var data = Greenhouse.getGreenhouseStatus();
         var dataJson = JSON.parse(data);
 
-        this.greenhouseState.humidityValue = dataJson.Humidity;
-        this.greenhouseState.temperatureValue = dataJson.Temperature;
-
+        this.greenhouseState = dataJson;
+        
         listenersArray.forEach((socket) => {
             //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)

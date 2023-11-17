@@ -17,11 +17,12 @@ socket.on("returnGreenhouseStatus", (greenhouseState) => {
 
     var dateTime = GetCurrentDateTime();
     document.getElementById("updateTime").innerHTML = dateTime;
-    document.getElementById("tempValue").innerHTML = greenhouseState.temperatureValue/10;
-    document.getElementById("humidValue").innerHTML = greenhouseState.humidityValue;
-    document.getElementById("LightIntensity").value = greenhouseState.lightIntensity;
-    document.getElementById("windowCheck").checked = greenhouseState.window;
-    document.getElementById("heaterCheck").checked = greenhouseState.heater;
+    document.getElementById("tempValue").innerHTML = greenhouseState.Temperature/10;
+    document.getElementById("humidValue").innerHTML = greenhouseState.Humidity;
+    document.getElementById("ArtificialLightIntensity").value = greenhouseState.LightStatus;
+    document.getElementById("windowCheck").checked = greenhouseState.WindowStatus;
+    document.getElementById("heaterCheck").checked = greenhouseState.HeaterStatus;
+    document.getElementById("LightLevelValue").checked = greenhouseState.HeaterStatus;
 });
 
 socket.on("returnEvent", (data) => { 
