@@ -1,11 +1,6 @@
 // Author: Sander Kirchert 304694
 
 
-var temperatureValue = 1;
-var humidityValue = 2;
-
-
-
 // Establishing connection with server
 var socket = io.connect();
 // client-side
@@ -14,8 +9,26 @@ socket.on("connect", (data) => {
     console.log(socket.id); 
 });
 
-
+// when server emits "returnGreenhouseStatus"
 socket.on("returnGreenhouseStatus", (greenhouseState) => { 
+
+    updateHtmlView(greenhouseState)
+
+});
+
+
+socket.emit("ListenToGreenhouseStatus");
+
+
+socket.on("returnEvent", (data) => { 
+    console.log(data);
+});
+
+/**
+ * Updates the html document with given greenhouse state
+ * @param {*} greenhouseState 
+ */
+function updateHtmlView(greenhouseState){
 
     var dateTime = GetCurrentDateTime();
     document.getElementById("updateTime").innerHTML = dateTime;
@@ -25,12 +38,8 @@ socket.on("returnGreenhouseStatus", (greenhouseState) => {
     document.getElementById("LightLevelValue").innerHTML = greenhouseState.NaturalLight;
     document.getElementById("windowCheck").checked = greenhouseState.WindowStatus;
     document.getElementById("heaterCheck").checked = greenhouseState.HeaterStatus;
-    
-});
 
-socket.on("returnEvent", (data) => { 
-    console.log(data);
-});
+}
 
 
 function GetCurrentDateTime(){
@@ -41,7 +50,6 @@ function GetCurrentDateTime(){
     return dateTime;
 }
 
-socket.emit("ListenToGreenhouseStatus");
 
 function toggleHeater() {
     // Get the checkbox

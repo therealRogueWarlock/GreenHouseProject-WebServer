@@ -7,7 +7,6 @@ import child_process from 'child_process'
 //utility classes to call CMD commands
 export class CommandCaller{
 
-
     /**
          * sync call to CMD, blocking 
          *

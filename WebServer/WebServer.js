@@ -158,6 +158,7 @@ export class WebServer {
 
         var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
 
+        // just return if there are no listeners
         if (listenersArray.length < 1) return;
 
         var data = Greenhouse.getGreenhouseStatus();
@@ -166,7 +167,6 @@ export class WebServer {
         this.greenhouseState = dataJson;
 
         listenersArray.forEach((socket) => {
-            //console.log("Brordcast to " + socket.id)
             socket.emit("returnGreenhouseStatus", this.greenhouseState)
         })
     }
