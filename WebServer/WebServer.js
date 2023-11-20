@@ -1,4 +1,5 @@
 // Author: Sander Kirchert 304694
+// Filename: WebServer.js
 
 import http from 'http';
 import fs from 'fs';
@@ -178,7 +179,7 @@ export class WebServer {
 
 
     /**
-     * 
+     * Removes a socket from listner map, called on socket disconnect
      * 
      * @param {*} socket 
      */

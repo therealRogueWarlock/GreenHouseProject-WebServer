@@ -1,4 +1,5 @@
 // Author: Sander Kirchert 304694
+// Filename: client.js
 
 
 // Establishing connection with server
@@ -16,10 +17,10 @@ socket.on("returnGreenhouseStatus", (greenhouseState) => {
 
 });
 
-
+// Ask server to add client to Greenhouse status listeners
 socket.emit("ListenToGreenhouseStatus");
 
-
+// Debug methode, recive back values send to the server
 socket.on("returnEvent", (data) => { 
     console.log(data);
 });
@@ -40,7 +41,10 @@ function updateHtmlView(greenhouseState){
     document.getElementById("heaterCheck").checked = greenhouseState.HeaterStatus;
 
 }
-
+/**
+ * Utiliy methode to get current date and time
+ * @returns 
+ */
 
 function GetCurrentDateTime(){
     var today = new Date();
@@ -50,7 +54,10 @@ function GetCurrentDateTime(){
     return dateTime;
 }
 
-
+/**
+ * UI event handler for Heater toggle.
+ * Emits socket event setHeater when toggled.
+ */
 function toggleHeater() {
     // Get the checkbox
     var checkBox = document.getElementById("heaterCheck");
@@ -60,7 +67,10 @@ function toggleHeater() {
         socket.emit("setHeater", 0);
     }
 }
-
+/**
+ * UI event handler for Window toggle.
+ * Emits socket event setWindow when toggled.
+ */
 function toggleWindow() {
     // Get the checkbox
     var checkBox = document.getElementById("windowCheck");
@@ -70,9 +80,11 @@ function toggleWindow() {
         socket.emit("setWindow", 0);
     }
 }
-
+/**
+ * UI event handler for Light slider.
+ * Emits socket event setLightIntensity on value change.
+ */
 function lightSlider() {
-    
     var lightInput = document.getElementById("ArtificialLightIntensity");
     socket.emit('setLightIntensity', lightInput.value);
 }
