@@ -8,17 +8,21 @@ var socket = io.connect();
 socket.on("connect", (data) => {
     console.log(data)
     console.log(socket.id); 
+
+    // Ask server to add client to Greenhouse status listeners
+    socket.emit("ListenToGreenhouseStatus");
+
+    // when server emits "returnGreenhouseStatus"
+    socket.on("returnGreenhouseStatus", (greenhouseState) => { 
+
+        updateHtmlView(greenhouseState)
+
+    });
+
 });
 
-// when server emits "returnGreenhouseStatus"
-socket.on("returnGreenhouseStatus", (greenhouseState) => { 
 
-    updateHtmlView(greenhouseState)
 
-});
-
-// Ask server to add client to Greenhouse status listeners
-socket.emit("ListenToGreenhouseStatus");
 
 // Debug methode, recive back values send to the server
 socket.on("returnEvent", (data) => { 
