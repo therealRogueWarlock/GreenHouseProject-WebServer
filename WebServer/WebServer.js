@@ -139,7 +139,7 @@ export class WebServer {
         // Initilize loop that trasmit green house state to all listeners in a given interval
         setInterval(() => {
             self.transmitGreenhouseStatus();
-        }, 1500)
+        }, 2000)
 
 
         // Start server 
