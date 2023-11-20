@@ -156,8 +156,6 @@ export class WebServer {
     */
     transmitGreenhouseStatus() {
 
-        this.listeners.forEach(function (value, key, map))
-
         var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
 
         if (listenersArray.length < 1) return;
