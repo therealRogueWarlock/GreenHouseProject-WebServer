@@ -1,5 +1,5 @@
 import {WebServer} from "./WebServer/WebServer.js"
 
 
-new WebServer().initServer().startServer();
+new WebServer(8888).initServer().startServer();
 

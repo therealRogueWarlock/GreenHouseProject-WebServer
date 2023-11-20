@@ -1,3 +1,5 @@
+// Author: Sander Kirchert 304694
+
 
 var temperatureValue = 1;
 var humidityValue = 2;

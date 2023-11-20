@@ -1,24 +1,37 @@
+// Author: Sander Kirchert 304694
 
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+
 // Loading socket io module
 import { Server as SocketServer } from 'socket.io';
-import { Greenhouse } from './BBBDriverCall/Greenhouse.js'
+import { Greenhouse } from './BBBInterface/Greenhouse.js'
 
 export class WebServer {
 
-    constructor() {
-        this.listeners = new Map();
+    constructor(port) {
 
+        // declare a map to store socket listeners 
+        this.listeners = new Map();
+        // creating a empty array for Greenhouse Status listeners
         this.listeners.set("ListenToGreenhouseStatus", [])
 
-        this.greenhouseState = {"Humidity":0, "Temperature":0, "NaturalLight":0, "WindowStatus":0, "HeaterStatus":0, "LightIntensity":0}
+        // Greenhouse state as Json
+        this.greenhouseState = { "Humidity": 0, "Temperature": 0, "NaturalLight": 0, "WindowStatus": 0, "HeaterStatus": 0, "LightIntensity": 0 }
 
-    
+        this.port = port;
+
         this.server;
+
     }
 
+
+    /**
+         * Init HTTP server
+         *
+         * @returns this aka WebServer
+    */
     initServer() {
 
         if (this.server) return;
@@ -26,16 +39,18 @@ export class WebServer {
         // Initialize the server on port 8888
         this.server = http.createServer(function (req, res) {
             var file = ((req.url == '/') ? '/index.html' : req.url);
+
+            // Define path to what is requested
             var rootPath = "./WebInterface"
             var filePath = rootPath + file;
             var fileExtension = path.extname(filePath);
             var contentType = 'text/html';
-            // If and when css is added to the website
 
             if (fileExtension == '.css') {
                 contentType = 'text/css';
             }
 
+            // check if the file exits and write to the request result if found
             fs.exists(filePath, function (exists) {
                 if (exists) {
 
@@ -61,44 +76,53 @@ export class WebServer {
         return this;
     }
 
+
+    /**
+         * Start Socket server using the Http server, InitServer has to be called first
+         *
+         * @returns return output of cmd result
+    */
+
     startServer() {
 
         if (!this.server) return;
         var self = this;
 
         var socketIo = new SocketServer(this.server);
-        // When communication is established
 
+        // When communication is established
         socketIo.on('connection', function (socket) {
 
             console.log("Connected:" + socket.id);
 
-            // Service methodes
-            socket.on('getTemperatureAndHumidity', () => {
+            // Listen Services 
 
-                socket.emit("returnTemperatureAndHumidity", TempAndHumidity.getTemperatureAndHumidity());
-
+            // add the socket to Listen to Greenhouse state if requested
+            socket.on('ListenToGreenhouseStatus', () => {
+                self.addGreenhouseListener(socket);
             });
 
+
+            // Service methodes
             socket.on('setHeater', (data) => {
-                
+
+                // Call the greenhouse interface to set the heater state
                 Greenhouse.setHeater(data)
 
+                // Return send value, for debug perpus
                 socket.emit("returnEvent", data);
-
             });
 
+
             socket.on('setWindow', (data) => {
-                
+
                 Greenhouse.setWindow(data)
-                
+
                 socket.emit("returnEvent", data);
 
             });
 
             socket.on('setLightIntensity', (data) => {
-                
-                self.greenhouseState.lightIntensity = data;
 
                 Greenhouse.setLightIntensity(data)
 
@@ -106,30 +130,36 @@ export class WebServer {
 
             });
 
-
-            socket.on('ListenToGreenhouseStatus', () => {
-                self.listeners.get("ListenToGreenhouseStatus").push(socket)
-            });
-
+            // when socket disconnecting remove socket from listners
             socket.on("disconnect", (reason) => {
-                self.removeSocketListner(socket)
+                self.removeGreenhouseListener(socket)
             });
         });
 
+        // Initilize loop that trasmit green house state to all listeners in a given interval
         setInterval(() => {
             self.transmitGreenhouseStatus();
         }, 1500)
 
 
-        this.server.listen(8888);
+        // Start server 
+        this.server.listen(this.port);
         console.log("Server Running ...");
-
+        console.log(server.address());
         return this;
     }
 
+   
+
+    /**
+        *Getting current Greenhouse status and trasmit to all sockets listening
+    */
     transmitGreenhouseStatus() {
+
+        this.listeners.forEach(function (value, key, map))
+
         var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
-        
+
         if (listenersArray.length < 1) return;
 
         var data = Greenhouse.getGreenhouseStatus();
@@ -143,13 +173,24 @@ export class WebServer {
         })
     }
 
-    removeSocketListner(socket){
+
+    addGreenhouseListener(socket) {
+        this.listeners.get("ListenToGreenhouseStatus").push(socket);
+    }
+
+
+    /**
+     * 
+     * 
+     * @param {*} socket 
+     */
+    removeGreenhouseListener(socket) {
 
         var listenersArray = this.listeners.get("ListenToGreenhouseStatus");
 
         let index = listenersArray.indexOf(socket);
         if (index !== -1) {
-            console.log("remove: "+ socket.id + "at:" + index)
+            console.log("remove: " + socket.id + "at:" + index)
             listenersArray.splice(index, 1);
         }
 
